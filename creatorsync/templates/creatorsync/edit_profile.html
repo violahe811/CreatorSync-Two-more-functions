@@ -1,0 +1,80 @@
+{% extends "creatorsync/layout.html" %}
+
+{% block body %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body p-5">
+
+                <h2 class="mb-4">
+                    Edit Profile
+                </h2>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            Instagram
+                        </label>
+
+                        <input
+                            type="text"
+                            name="instagram"
+                            class="form-control"
+                            value="{{ profile.instagram }}"
+                        >
+
+                    </div>
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+                            TikTok
+                        </label>
+
+                        <input
+                            type="text"
+                            name="tiktok"
+                            class="form-control"
+                            value="{{ profile.tiktok }}"
+                        >
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+                            Followers
+                        </label>
+
+                        <input
+                            type="number"
+                            name="followers"
+                            class="form-control"
+                            value="{{ profile.followers }}"
+                        >
+
+                    </div>
+
+                    <button class="btn btn-dark">
+                        Save Changes
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

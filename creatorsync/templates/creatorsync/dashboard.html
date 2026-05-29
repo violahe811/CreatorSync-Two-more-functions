@@ -1,0 +1,130 @@
+{% extends "creatorsync/layout.html" %}
+
+{% block body %}
+
+<h2 class="mb-4">
+    Dashboard Statistics
+</h2>
+
+<div class="row mb-5">
+
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h3>{{ application_count }}</h3>
+                <p>Applications</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h3>{{ campaign_count }}</h3>
+                <p>Campaigns</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center shadow-sm">
+            <div class="card-body">
+                <h3>{{ creator_count }}</h3>
+                <p>Creators</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card shadow-sm mb-5">
+    <div class="card-body">
+        <canvas id="statsChart"></canvas>
+    </div>
+</div>
+
+<h2 class="mb-4">
+    My Applications
+</h2>
+
+<div class="row">
+
+    {% for application in applications %}
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h4 class="card-title">
+                        {{ application.campaign.title }}
+                    </h4>
+
+                    <p class="card-text">
+                        {{ application.campaign.description }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ application.status }}
+                    </p>
+
+                    <p>
+                        <strong>Budget:</strong>
+                        ${{ application.campaign.budget }}
+                    </p>
+
+                    <a
+                        href="{% url 'campaign_detail' application.campaign.id %}"
+                        class="btn btn-dark"
+                    >
+                        View Campaign
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <p>
+            You have not applied to any campaigns yet.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const ctx = document.getElementById("statsChart");
+
+    new Chart(ctx, {
+        type: "bar",
+        data: {
+            labels: [
+                "Applications",
+                "Campaigns",
+                "Creators"
+            ],
+            datasets: [{
+                label: "Platform Statistics",
+                data: [
+                    {{ application_count }},
+                    {{ campaign_count }},
+                    {{ creator_count }}
+                ]
+            }]
+        }
+    });
+
+});
+
+</script>
+
+{% endblock %}

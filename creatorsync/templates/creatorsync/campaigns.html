@@ -1,0 +1,76 @@
+{% extends "creatorsync/layout.html" %}
+
+{% block body %}
+
+<h2 class="mb-4">
+    Campaigns
+</h2>
+
+<div class="mb-4">
+    <input
+        type="text"
+        id="campaign-search"
+        class="form-control"
+        placeholder="Search campaigns..."
+    >
+</div>
+
+<div class="row" id="campaign-list">
+
+    {% for campaign in campaigns %}
+
+        <div
+            class="col-md-4 mb-4 campaign-card"
+            data-title="{{ campaign.title|lower }}"
+            data-description="{{ campaign.description|lower }}"
+        >
+
+            <a href="{% url 'campaign_detail' campaign.id %}"
+               class="text-decoration-none text-dark">
+
+                <div class="card h-100 shadow-sm">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            {{ campaign.title }}
+                        </h5>
+
+                        <p class="card-text">
+                            {{ campaign.description }}
+                        </p>
+
+                        <p>
+                            <strong>Budget:</strong>
+                            ${{ campaign.budget }}
+                        </p>
+
+                        <p>
+                            <strong>Status:</strong>
+                            {{ campaign.status }}
+                        </p>
+
+                        <p>
+                            <strong>Deadline:</strong>
+                            {{ campaign.deadline }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </a>
+
+        </div>
+
+    {% empty %}
+
+        <p>
+            No campaigns available.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

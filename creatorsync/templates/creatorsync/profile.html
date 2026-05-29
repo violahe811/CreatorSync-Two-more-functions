@@ -1,0 +1,58 @@
+{% extends "creatorsync/layout.html" %}
+
+{% block body %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-8">
+
+        <div class="card shadow-sm">
+
+            <div class="card-body p-5">
+
+                <h1 class="mb-4">
+                    {{ user.username }}
+                </h1>
+
+                <hr>
+
+                <h3>
+                    Instagram
+                </h3>
+
+                <p>
+                    {{ profile.instagram }}
+                </p>
+
+                <h3>
+                    TikTok
+                </h3>
+
+                <p>
+                    {{ profile.tiktok }}
+                </p>
+
+                <h3>
+                    Followers
+                </h3>
+
+                <p>
+                    {{ profile.followers }}
+                </p>
+
+                <a
+                    href="{% url 'edit_profile' %}"
+                    class="btn btn-dark mt-3"
+                >
+                    Edit Profile
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

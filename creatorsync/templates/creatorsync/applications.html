@@ -1,0 +1,63 @@
+{% extends "creatorsync/layout.html" %}
+
+{% block body %}
+
+<h2 class="mb-4">
+    Campaign Applications
+</h2>
+
+<div class="row">
+
+    {% for application in applications %}
+
+        <div class="col-md-6 mb-4">
+
+            <div class="card shadow-sm h-100">
+
+                <div class="card-body">
+
+                    <h4 class="card-title">
+                        {{ application.campaign.title }}
+                    </h4>
+
+                    <hr>
+
+                    <p>
+                        <strong>Creator:</strong>
+                        {{ application.creator.username }}
+                    </p>
+
+                    <p>
+                        <strong>Status:</strong>
+                        {{ application.status }}
+                    </p>
+
+                    <p>
+                        <strong>Applied At:</strong>
+                        {{ application.applied_at }}
+                    </p>
+
+                    <a
+                        href="{% url 'campaign_detail' application.campaign.id %}"
+                        class="btn btn-dark"
+                    >
+                        View Campaign
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    {% empty %}
+
+        <p>
+            No applications yet.
+        </p>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}
